@@ -9,6 +9,7 @@
 
 #include "MainScene.h"
 #include "GameScene.h"
+#include "global.h"
 
 MainScene::~MainScene()
 {
@@ -57,17 +58,17 @@ MainScene::MainScene()
 //    this->addChild(sprite2);
     
 //    CCMenuItemImage * pStartItem = CCMenuItemImage::create("button_Start.png", "button_Start.png");
-    CCMenuItemImage * pStartItem = CCMenuItemImage::create("button_Start.png", "button_Start.png", this, menu_selector(MainScene::StartGame));
+    CCMenuItemImage * pStartItem = CCMenuItemImage::create("button_Start.png", "button_Start__Selected.png", this, menu_selector(MainScene::StartGame));
     CCMenu * StartMenu = CCMenu::createWithItem(pStartItem);
     StartMenu->setPosition(ccp(400,260));
     this->addChild(StartMenu);
     
-    CCMenuItemImage * pContinuteItem = CCMenuItemImage::create("button_Continute.png", "button_Continute.png", this, menu_selector(MainScene::ContinuteGame));
+    CCMenuItemImage * pContinuteItem = CCMenuItemImage::create("button_Continute.png", "button_Continute_Selected.png", this, menu_selector(MainScene::ContinuteGame));
     CCMenu * pContinuteMenu = CCMenu::createWithItem(pContinuteItem);
     pContinuteMenu->setPosition(ccp(370,180));
     this->addChild(pContinuteMenu);
     
-    CCMenuItemImage * pSettingItem = CCMenuItemImage::create("button_Setting.png", "button_Setting.png", this, menu_selector(MainScene::Setting));
+    CCMenuItemImage * pSettingItem = CCMenuItemImage::create("button_Setting.png", "button_Setting_Selected.png", this, menu_selector(MainScene::Setting));
     CCMenu * pSettingMenu = CCMenu::createWithItem(pSettingItem);
     pSettingMenu->setPosition(ccp(420,120));
     this->addChild(pSettingMenu);
@@ -86,8 +87,6 @@ CCScene* MainScene::scene()
 
 void MainScene::StartGame()
 {
-    static int i = 0;
-    CCLog("start game:%d",i++);
     
     CCScene * scene = GameScene::scene();
 //    CCDirector::sharedDirector()->replaceScene(scene);//正常切换
@@ -111,7 +110,8 @@ void MainScene::StartGame()
 
 void MainScene::ContinuteGame()
 {
-    CCLog("Continute game");
+    global::readGameLevel();
+    StartGame();
 }
 
 

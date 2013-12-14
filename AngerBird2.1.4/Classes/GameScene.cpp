@@ -64,8 +64,8 @@ GameScene::GameScene()
     this->addChild(pIceGround,10);
     
     
-    b2BodyDef bodyDef;
-    bodyDef.type = b2_staticBody;
+//    b2BodyDef bodyDef;
+//    bodyDef.type = b2_staticBody;
     
 //    //以精灵中心为位置
 //    bodyDef.position.Set((pIceGround->getPositionX() + pIceGround->getContentSize().width/2.0)/PTM_RATIO, (pIceGround->getPositionY() + pIceGround->getContentSize().
@@ -245,6 +245,7 @@ void GameScene::tick(CCTime dt)
             CCDelayTime *delayAction = CCDelayTime::create(5.0f);
             CCCallFunc *callSelectorAction = CCCallFunc::create(this, callfunc_selector(GameScene::resetBullet));
             this->runAction(CCSequence::create(delayAction, callSelectorAction, NULL));
+//            CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("fly.mp3");
             
             m_iCurrentBullet++;
             
@@ -496,12 +497,6 @@ void GameScene::resetBullet()
 
 void GameScene::createTargets(int iLevel)
 {
-    char a[12] = "brick_1.png";
-    char b[12] = "brick_2.png";
-    char c[12] = "brick_3.png";
-    char brick_platfor[19] = "brick_platform.png";
-    char dog[13] = "head_dog.png";
-    char cat[13] = "head_cat.png";
 
     CCDictionary * pEnemyNumDic = (CCDictionary*)((CCArray*)m_pEnemyInfos->objectAtIndex(iLevel))->objectAtIndex(0);
     m_iCurrentEnemy = pEnemyNumDic->valueForKey("EnemyNumber")->intValue();
@@ -612,6 +607,8 @@ bool GameScene::eliminateEnery(b2Body*enemyBody)
 
 void GameScene::backToMainMenu()
 {
+    global::saveGameLevel();
+    
     CCScene * scence = MainScene::scene();
     CCDirector::sharedDirector()->replaceScene(CCTransitionJumpZoom::create(2,scence));
     
@@ -624,6 +621,7 @@ void GameScene::succed(bool bSuccess)
     {
         CCParticleSystem * pExplosion = cocos2d::CCParticleSystemQuad::create("congratulation.plist") ;//create("33.plist");
         this->addChild(pExplosion,100);
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("succece.mp3");
         
         m_popView = new PopUpView("popUpBGg.png", "Yeah", "恭喜你，闯关成功！", "OK",menu_selector(GameScene::nextLevel), "Cancel",menu_selector(GameScene::backToMainMenu),this);
         this->addChild(m_popView,20);
@@ -657,6 +655,7 @@ void GameScene::getEnemyInfo()
 
 
 void GameScene::nextLevel()
+
 {
     this->removeChild(m_popView, true);
     
@@ -675,4 +674,15 @@ void GameScene::repeatGame()
 }
 
 
+void GameScene::onEnter()
+{
+    CCLayer::onEnter();//父类一定要执行
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("backgroundMusic.mp3", true);
+}
 
+
+void GameScene::onExit()
+{
+    CCLayer::onExit();
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+}

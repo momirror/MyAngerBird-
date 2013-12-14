@@ -19,3 +19,16 @@ void global::setGameLevel(int iLevel)
 {
     m_iGameLevel = iLevel;
 }
+
+
+void global::saveGameLevel()
+{
+    CCUserDefault::sharedUserDefault()->setIntegerForKey("GameLevel", m_iGameLevel);
+    CCUserDefault::sharedUserDefault()->flush();//写入到文件中
+
+}
+
+void global::readGameLevel()
+{
+    m_iGameLevel = CCUserDefault::sharedUserDefault()->getIntegerForKey("GameLevel");
+}

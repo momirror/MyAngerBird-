@@ -19,6 +19,8 @@ class global
 public:
     static int getGameLevel();
     static void setGameLevel(int iLevel);
+    static void saveGameLevel();
+    static void readGameLevel();
 };
 
 #endif /* defined(__AngerBird2_1_4__global__) */

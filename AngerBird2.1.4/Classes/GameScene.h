@@ -48,6 +48,8 @@ public:
     void getEnemyInfo();
     void nextLevel();
     void repeatGame();
+    void onEnter();
+    void onExit();
 
     
 private:
