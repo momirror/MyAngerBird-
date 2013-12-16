@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "cocos2d.h"
+#include "PopUpView.h"
 using namespace cocos2d;
 
 class MainScene:cocos2d::CCLayer {
@@ -24,6 +25,11 @@ public:
     void StartGame();
     void ContinuteGame();
     void Setting();
+    void cancel();
+    void newGame();
+private:
+    PopUpView * m_pPopView;
+
 
 };
 

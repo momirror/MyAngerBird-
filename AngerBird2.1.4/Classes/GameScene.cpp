@@ -66,15 +66,15 @@ GameScene::GameScene()
     
 //    b2BodyDef bodyDef;
 //    bodyDef.type = b2_staticBody;
-    
+//    
 //    //以精灵中心为位置
 //    bodyDef.position.Set((pIceGround->getPositionX() + pIceGround->getContentSize().width/2.0)/PTM_RATIO, (pIceGround->getPositionY() + pIceGround->getContentSize().
-//                                                                                                           height/2.0)/PTM_RATIO);
+//                                                                                       height/2.0)/PTM_RATIO);
 //    bodyDef.userData = pIceGround;
 //    
 //    b2Body * body = m_pWorld->CreateBody(&bodyDef);
 //    
-//    CCLog("%f,%f",body->GetPosition().x,body->GetPosition().y);
+//    CCLog("%f,%f",body->GetPosition().x*PTM_RATIO,body->GetPosition().y*PTM_RATIO);
 //    b2FixtureDef fixtureDef;
 //    
 //    b2PolygonShape box;
@@ -83,8 +83,6 @@ GameScene::GameScene()
 //    fixtureDef.friction = 0.2f;//摩擦力
 //    box.SetAsBox(pIceGround->getContentSize().width/2.0/PTM_RATIO, pIceGround->getContentSize().height/2.0/PTM_RATIO);
 //    body->CreateFixture(&box,0.5f);
-//    m_pTargets.push_back(body);
-    
 
     
 
@@ -179,9 +177,11 @@ void GameScene::InitPhysical()
     
     b2EdgeShape screenBorderShape;
     
+
     screenBorderShape.Set(b2Vec2(0,FLOOR_HEIGHT/PTM_RATIO), b2Vec2(screenSize.width*3/PTM_RATIO,
                                                                    FLOOR_HEIGHT/PTM_RATIO));//下边界
-    m_pGroundBody->CreateFixture(&screenBorderShape, 0);
+    b2Fixture * fixture = m_pGroundBody->CreateFixture(&screenBorderShape, 1);
+    fixture->SetFriction(1.0f);//给地面一点摩擦力
     
     screenBorderShape.Set(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(0,FLOOR_HEIGHT/PTM_RATIO));//左边界
     m_pGroundBody->CreateFixture(&screenBorderShape, 0);
@@ -558,7 +558,7 @@ void GameScene::createTarget(char * imageName,CCPoint position,float rotation,bo
         fixtureDef.friction = 0.2f;//摩擦力
         circle.m_radius = sprite->getContentSize().width/2.0/PTM_RATIO;
         fixture = body->CreateFixture(&circle,0.5);
-        m_pTargets.push_back(body);
+//        m_pTargets.push_back(body);
     }
     else
     {
@@ -568,12 +568,12 @@ void GameScene::createTarget(char * imageName,CCPoint position,float rotation,bo
         fixtureDef.friction = 0.2f;//摩擦力
         box.SetAsBox(sprite->getContentSize().width/2.0/PTM_RATIO, sprite->getContentSize().height/2.0/PTM_RATIO);
         body->CreateFixture(&box,0.5f);
-        m_pTargets.push_back(body);
+//        m_pTargets.push_back(body);
     }
     
     if(isEnemy)
     {
-        fixture->SetUserData((void*)1);//??
+//        fixture->SetUserData((void*)1);//??
         m_pEnemies.push_back(body);
     }
     
@@ -610,7 +610,7 @@ void GameScene::backToMainMenu()
     global::saveGameLevel();
     
     CCScene * scence = MainScene::scene();
-    CCDirector::sharedDirector()->replaceScene(CCTransitionJumpZoom::create(2,scence));
+    CCDirector::sharedDirector()->replaceScene(CCTransitionJumpZoom::create(2.0f,scence));
     
 }
 
@@ -619,9 +619,15 @@ void GameScene::succed(bool bSuccess)
 {
     if(bSuccess)
     {
+        global::setGameLevel(global::getGameLevel() + 1);
+        
         CCParticleSystem * pExplosion = cocos2d::CCParticleSystemQuad::create("congratulation.plist") ;//create("33.plist");
         this->addChild(pExplosion,100);
-        CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("succece.mp3");
+        
+        if(global::getGameEffectState())
+        {
+            CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("succece.mp3");
+        }
         
         m_popView = new PopUpView("popUpBGg.png", "Yeah", "恭喜你，闯关成功！", "OK",menu_selector(GameScene::nextLevel), "Cancel",menu_selector(GameScene::backToMainMenu),this);
         this->addChild(m_popView,20);
@@ -659,7 +665,6 @@ void GameScene::nextLevel()
 {
     this->removeChild(m_popView, true);
     
-    global::setGameLevel(global::getGameLevel() + 1);
     CCScene * scene = GameScene::scene();
     CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(2, scene)); //淡出淡入切换
 
@@ -677,12 +682,19 @@ void GameScene::repeatGame()
 void GameScene::onEnter()
 {
     CCLayer::onEnter();//父类一定要执行
-    CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("backgroundMusic.mp3", true);
+    
+    if(global::getBackgroundMusicState())
+    {
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("backgroundMusic.mp3", true);
+    }
 }
 
 
 void GameScene::onExit()
 {
     CCLayer::onExit();
-    CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+    if(global::getBackgroundMusicState())
+    {
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+    }
 }

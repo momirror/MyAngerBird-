@@ -10,6 +10,7 @@
 #include "MainScene.h"
 #include "GameScene.h"
 #include "global.h"
+#include "SettingScene.h"
 
 MainScene::~MainScene()
 {
@@ -61,17 +62,23 @@ MainScene::MainScene()
     CCMenuItemImage * pStartItem = CCMenuItemImage::create("button_Start.png", "button_Start__Selected.png", this, menu_selector(MainScene::StartGame));
     CCMenu * StartMenu = CCMenu::createWithItem(pStartItem);
     StartMenu->setPosition(ccp(400,260));
+    StartMenu->setTouchPriority(1);
     this->addChild(StartMenu);
+    
     
     CCMenuItemImage * pContinuteItem = CCMenuItemImage::create("button_Continute.png", "button_Continute_Selected.png", this, menu_selector(MainScene::ContinuteGame));
     CCMenu * pContinuteMenu = CCMenu::createWithItem(pContinuteItem);
     pContinuteMenu->setPosition(ccp(370,180));
+    pContinuteMenu->setTouchPriority(1);
     this->addChild(pContinuteMenu);
+    
     
     CCMenuItemImage * pSettingItem = CCMenuItemImage::create("button_Setting.png", "button_Setting_Selected.png", this, menu_selector(MainScene::Setting));
     CCMenu * pSettingMenu = CCMenu::createWithItem(pSettingItem);
     pSettingMenu->setPosition(ccp(420,120));
+    pSettingMenu->setTouchPriority(1);
     this->addChild(pSettingMenu);
+    
     
 }
 
@@ -87,23 +94,17 @@ CCScene* MainScene::scene()
 
 void MainScene::StartGame()
 {
-    
-    CCScene * scene = GameScene::scene();
-//    CCDirector::sharedDirector()->replaceScene(scene);//正常切换
-    
-//    CCDirector::sharedDirector()->replaceScene(CCTransitionJumpZoom::transitionWithDuration(2,scene));//弹跳切换
-    
-//    CCDirector::sharedDirector()->replaceScene(CCTransitionFlipX::transitionWithDuration(2, scene));//X轴翻转切换
-    
-//    CCDirector::sharedDirector()->replaceScene(CCTransitionFlipY::transitionWithDuration(2, scene));//Y轴翻转切换
-    
-    CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(2, scene)); //淡出淡入切换
-    
-//    CCDirector::sharedDirector()->replaceScene(CCTransitionShrinkGrow::transitionWithDuration(2, scene));//交错切换
-    
-//     CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInL::transitionWithDuration(2, scene));//从左进入覆盖切换
-    
-//    CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInL::transitionWithDuration(2, scene));//从左进入推出切换
+    if(global::getGameLevel() != 0)
+    {
+        m_pPopView = new PopUpView("popUpBGg.png", "", "你真的是从头开始吗？这将会覆盖之前的游戏进度？", "开始",menu_selector(MainScene::newGame), "取消",menu_selector(MainScene::cancel),this);
+        this->addChild(m_pPopView);
+    }
+    else
+    {
+        global::setGameLevel(0);
+        CCScene * scene = GameScene::scene();
+        CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene)); //淡出淡入切换
+    }
     
 }
 
@@ -111,11 +112,41 @@ void MainScene::StartGame()
 void MainScene::ContinuteGame()
 {
     global::readGameLevel();
-    StartGame();
+    CCScene * scene = GameScene::scene();
+    CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene)); //淡出淡入切换
 }
 
 
 void MainScene::Setting()
 {
-    CCLog("setting");
+    CCScene * scene = SettingScene::scene();
+    CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInR::create(0.5, scene));//从左进入推出切换
+}
+
+void MainScene::cancel()
+{
+    this->removeChild(m_pPopView, true);
+}
+
+void MainScene::newGame()
+{
+    this->removeChild(m_pPopView, true);
+    
+    global::setGameLevel(0);
+    CCScene * scene = GameScene::scene();
+    //    CCDirector::sharedDirector()->replaceScene(scene);//正常切换
+    
+    //    CCDirector::sharedDirector()->replaceScene(CCTransitionJumpZoom::transitionWithDuration(2,scene));//弹跳切换
+    
+    //    CCDirector::sharedDirector()->replaceScene(CCTransitionFlipX::transitionWithDuration(2, scene));//X轴翻转切换
+    
+    //    CCDirector::sharedDirector()->replaceScene(CCTransitionFlipY::transitionWithDuration(2, scene));//Y轴翻转切换
+    
+    CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(0.5, scene)); //淡出淡入切换
+    
+    //    CCDirector::sharedDirector()->replaceScene(CCTransitionShrinkGrow::transitionWithDuration(2, scene));//交错切换
+    
+    //     CCDirector::sharedDirector()->replaceScene(CCTransitionMoveInL::transitionWithDuration(2, scene));//从左进入覆盖切换
+    
+    //    CCDirector::sharedDirector()->replaceScene(CCTransitionSlideInL::transitionWithDuration(2, scene));//从左进入推出切换
 }

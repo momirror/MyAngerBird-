@@ -32,3 +32,25 @@ void global::readGameLevel()
 {
     m_iGameLevel = CCUserDefault::sharedUserDefault()->getIntegerForKey("GameLevel");
 }
+
+void global::setBackgroundMusicState(bool bOpen)
+{
+    CCUserDefault::sharedUserDefault()->setBoolForKey("BackgroundMusicState", bOpen);
+    CCUserDefault::sharedUserDefault()->flush();//写入到文件中
+}
+
+bool global::getBackgroundMusicState()
+{
+    return CCUserDefault::sharedUserDefault()->getBoolForKey("BackgroundMusicState");
+}
+
+void global::setGameEffectState(bool bOpen)
+{
+    CCUserDefault::sharedUserDefault()->setBoolForKey("GameEffectState", bOpen);
+    CCUserDefault::sharedUserDefault()->flush();//写入到文件中
+}
+
+bool global::getGameEffectState()
+{
+    return CCUserDefault::sharedUserDefault()->getBoolForKey("GameEffectState");
+}

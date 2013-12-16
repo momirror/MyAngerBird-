@@ -83,11 +83,28 @@ void PopUpView::onEnter()
 {
     CCLayer::onEnter();
     CCDirector* pDirector = CCDirector::sharedDirector();
-    pDirector->getTouchDispatcher()->addTargetedDelegate(this, this->getTouchPriority(), true);
+    pDirector->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
     
 }
 
 bool PopUpView::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)
 {
     return true;//下层菜单不再响应触摸函数
+}
+
+void PopUpView::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
+{
+    CCLog("popUpView touch begin");
+}
+
+void PopUpView::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
+{
+    CCLog("popUpView touch moved");
+
+}
+
+void PopUpView::ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event)
+{
+    CCLog("popUpView touch end");
+
 }

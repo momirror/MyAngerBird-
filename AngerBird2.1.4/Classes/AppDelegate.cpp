@@ -98,7 +98,8 @@ bool AppDelegate::applicationDidFinishLaunching()
 	// run
 	pDirector->runWithScene(pScene);
 
-    global::setGameLevel(0);
+//    global::setGameLevel(0);
+    global::readGameLevel();
 
 	return true;
 }

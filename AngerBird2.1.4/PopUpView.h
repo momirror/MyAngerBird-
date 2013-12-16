@@ -23,6 +23,10 @@ public:
     void CancelButtonResponse();
     void onEnter();
     bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
+    virtual void ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent);
+ 	virtual void ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent);
+    virtual void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
+    
     
 private:
     CCLabelTTF              * m_pTitleLabel;
