@@ -11,6 +11,16 @@
 		032E683E185AA02500D9574C /* congratulation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 032E683B185AA02500D9574C /* congratulation.plist */; };
 		032E683F185AA02500D9574C /* bom.plist in Resources */ = {isa = PBXBuildFile; fileRef = 032E683C185AA02500D9574C /* bom.plist */; };
 		032E6841185AA04100D9574C /* enemy.plist in Resources */ = {isa = PBXBuildFile; fileRef = 032E6840185AA04000D9574C /* enemy.plist */; };
+		03C9A300185BE97B00A297E6 /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 03C9A2FD185BE97B00A297E6 /* backgroundMusic.mp3 */; };
+		03C9A301185BE97B00A297E6 /* fly.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 03C9A2FE185BE97B00A297E6 /* fly.mp3 */; };
+		03C9A302185BE97B00A297E6 /* succece.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 03C9A2FF185BE97B00A297E6 /* succece.mp3 */; };
+		03E16279185BFC7100F840CB /* button_Start__Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 03E16276185BFC7100F840CB /* button_Start__Selected.png */; };
+		03E1627A185BFC7100F840CB /* button_Continute_Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 03E16277185BFC7100F840CB /* button_Continute_Selected.png */; };
+		03E1627B185BFC7100F840CB /* button_Setting_Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 03E16278185BFC7100F840CB /* button_Setting_Selected.png */; };
+		03E1627D185C0B1A00F840CB /* setting_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 03E1627C185C0B1A00F840CB /* setting_bg.png */; };
+		03E16284185C0ECA00F840CB /* SettingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03E16282185C0ECA00F840CB /* SettingScene.cpp */; };
+		03E16287185C2E6900F840CB /* button_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 03E16285185C2E6900F840CB /* button_on.png */; };
+		03E16288185C2E6900F840CB /* button_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 03E16286185C2E6900F840CB /* button_off.png */; };
 		03E797B3185AEF33008E1F99 /* global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03E797B1185AEF33008E1F99 /* global.cpp */; };
 		03E797B6185B251E008E1F99 /* button_Start.png in Resources */ = {isa = PBXBuildFile; fileRef = 03E797B5185B251E008E1F99 /* button_Start.png */; };
 		03E797BA185B28FC008E1F99 /* button_Continute.png in Resources */ = {isa = PBXBuildFile; fileRef = 03E797B8185B28FC008E1F99 /* button_Continute.png */; };
@@ -325,6 +335,17 @@
 		032E683B185AA02500D9574C /* congratulation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = congratulation.plist; sourceTree = "<group>"; };
 		032E683C185AA02500D9574C /* bom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bom.plist; sourceTree = "<group>"; };
 		032E6840185AA04000D9574C /* enemy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = enemy.plist; sourceTree = "<group>"; };
+		03C9A2FD185BE97B00A297E6 /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundMusic.mp3; sourceTree = "<group>"; };
+		03C9A2FE185BE97B00A297E6 /* fly.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fly.mp3; sourceTree = "<group>"; };
+		03C9A2FF185BE97B00A297E6 /* succece.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = succece.mp3; sourceTree = "<group>"; };
+		03E16276185BFC7100F840CB /* button_Start__Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_Start__Selected.png; sourceTree = "<group>"; };
+		03E16277185BFC7100F840CB /* button_Continute_Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_Continute_Selected.png; sourceTree = "<group>"; };
+		03E16278185BFC7100F840CB /* button_Setting_Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_Setting_Selected.png; sourceTree = "<group>"; };
+		03E1627C185C0B1A00F840CB /* setting_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting_bg.png; sourceTree = "<group>"; };
+		03E16282185C0ECA00F840CB /* SettingScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SettingScene.cpp; sourceTree = "<group>"; };
+		03E16283185C0ECA00F840CB /* SettingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingScene.h; sourceTree = "<group>"; };
+		03E16285185C2E6900F840CB /* button_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_on.png; sourceTree = "<group>"; };
+		03E16286185C2E6900F840CB /* button_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_off.png; sourceTree = "<group>"; };
 		03E797B1185AEF33008E1F99 /* global.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = global.cpp; path = AngerBird2.1.4/global.cpp; sourceTree = "<group>"; };
 		03E797B2185AEF33008E1F99 /* global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = global.h; path = AngerBird2.1.4/global.h; sourceTree = "<group>"; };
 		03E797B5185B251E008E1F99 /* button_Start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_Start.png; sourceTree = "<group>"; };
@@ -1004,6 +1025,16 @@
 			path = plist;
 			sourceTree = "<group>";
 		};
+		03C9A2FC185BE97B00A297E6 /* music */ = {
+			isa = PBXGroup;
+			children = (
+				03C9A2FD185BE97B00A297E6 /* backgroundMusic.mp3 */,
+				03C9A2FE185BE97B00A297E6 /* fly.mp3 */,
+				03C9A2FF185BE97B00A297E6 /* succece.mp3 */,
+			);
+			path = music;
+			sourceTree = "<group>";
+		};
 		03E797B4185AF09B008E1F99 /* Game */ = {
 			isa = PBXGroup;
 			children = (
@@ -1018,6 +1049,8 @@
 				03E797B2185AEF33008E1F99 /* global.h */,
 				03FA0A2B1859B7D2009B085C /* MyContactListener.cpp */,
 				03FA0A2C1859B7D2009B085C /* MyContactListener.h */,
+				03E16282185C0ECA00F840CB /* SettingScene.cpp */,
+				03E16283185C0ECA00F840CB /* SettingScene.h */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -1070,6 +1103,7 @@
 		03FA06561859B353009B085C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				03C9A2FC185BE97B00A297E6 /* music */,
 				03FA0A321859B7F6009B085C /* Images */,
 				03FA066B1859B353009B085C /* iTunesArtwork */,
 				032E6839185A9FE500D9574C /* plist */,
@@ -2268,6 +2302,12 @@
 		03FA0A321859B7F6009B085C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				03E16285185C2E6900F840CB /* button_on.png */,
+				03E16286185C2E6900F840CB /* button_off.png */,
+				03E1627C185C0B1A00F840CB /* setting_bg.png */,
+				03E16276185BFC7100F840CB /* button_Start__Selected.png */,
+				03E16277185BFC7100F840CB /* button_Continute_Selected.png */,
+				03E16278185BFC7100F840CB /* button_Setting_Selected.png */,
 				03E797BB185B2DA0008E1F99 /* button_Setting.png */,
 				03E797B8185B28FC008E1F99 /* button_Continute.png */,
 				03E797B5185B251E008E1F99 /* button_Start.png */,
@@ -2378,6 +2418,15 @@
 				03E797B6185B251E008E1F99 /* button_Start.png in Resources */,
 				03E797BA185B28FC008E1F99 /* button_Continute.png in Resources */,
 				03E797BC185B2DA0008E1F99 /* button_Setting.png in Resources */,
+				03C9A300185BE97B00A297E6 /* backgroundMusic.mp3 in Resources */,
+				03C9A301185BE97B00A297E6 /* fly.mp3 in Resources */,
+				03C9A302185BE97B00A297E6 /* succece.mp3 in Resources */,
+				03E16279185BFC7100F840CB /* button_Start__Selected.png in Resources */,
+				03E1627A185BFC7100F840CB /* button_Continute_Selected.png in Resources */,
+				03E1627B185BFC7100F840CB /* button_Setting_Selected.png in Resources */,
+				03E1627D185C0B1A00F840CB /* setting_bg.png in Resources */,
+				03E16287185C2E6900F840CB /* button_on.png in Resources */,
+				03E16288185C2E6900F840CB /* button_off.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2657,6 +2706,7 @@
 				03FA0A301859B7D2009B085C /* MyContactListener.cpp in Sources */,
 				03FA0A671859B9FE009B085C /* PopUpView.cpp in Sources */,
 				03E797B3185AEF33008E1F99 /* global.cpp in Sources */,
+				03E16284185C0ECA00F840CB /* SettingScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

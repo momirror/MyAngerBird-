@@ -73,12 +73,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "AngerBird2.1.4/Classes/GameScene.cpp"
-         timestampString = "408628728.886117"
+         timestampString = "408704145.258331"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "525"
-         endingLineNumber = "525"
+         startingLineNumber = "520"
+         endingLineNumber = "520"
          landmarkName = "GameScene::createTargets(int iLevel)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "AngerBird2.1.4/PopUpView.cpp"
+         timestampString = "408704766.155958"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "92"
+         endingLineNumber = "92"
+         landmarkName = "PopUpView::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
