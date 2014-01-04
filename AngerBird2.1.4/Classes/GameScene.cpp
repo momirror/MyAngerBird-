@@ -14,7 +14,7 @@ using namespace CocosDenshion;
 
 
 #define PTM_RATIO 32
-#define FLOOR_HEIGHT 62.0f
+#define FLOOR_HEIGHT 2*62.0f
 
 enum
 {
@@ -37,22 +37,22 @@ GameScene::GameScene()
     
     CCSprite * pBase2 = CCSprite::create("catapult_base_2.png");
     pBase2->setAnchorPoint(CCPointZero);
-    pBase2->setPosition(ccp(181.0f,FLOOR_HEIGHT));
+    pBase2->setPosition(ccp(2*181.0f,FLOOR_HEIGHT));
     this->addChild(pBase2,0);
     
     CCSprite * pSquirrelLeft = CCSprite::create("squirrel_1.png");
     pSquirrelLeft->setAnchorPoint(CCPointZero);
-    pSquirrelLeft->setPosition(ccp(11.0f,FLOOR_HEIGHT));
+    pSquirrelLeft->setPosition(ccp(2*11.0f,FLOOR_HEIGHT));
     this->addChild(pSquirrelLeft,0);
     
     CCSprite * pBase1 = CCSprite::create("catapult_base_1.png");
     pBase1->setAnchorPoint(CCPointZero);
-    pBase1->setPosition(ccp(181.0f,FLOOR_HEIGHT));
+    pBase1->setPosition(ccp(2*181.0f,FLOOR_HEIGHT));
     this->addChild(pBase1,9);
     
     CCSprite * pSquirrelRight = CCSprite::create("squirrel_2.png");
     pSquirrelRight->setAnchorPoint(CCPointZero);
-    pSquirrelRight->setPosition(ccp(240.0f,FLOOR_HEIGHT));
+    pSquirrelRight->setPosition(ccp(2*240.0f,FLOOR_HEIGHT));
     this->addChild(pSquirrelRight,9);
     
     
@@ -93,7 +93,7 @@ GameScene::GameScene()
     CCMenuItemImage * backItem = CCMenuItemImage::create("back.png", "back.png");
     backItem->setTarget(this, menu_selector(GameScene::backToMainMenu));
     CCMenu * pMenu = CCMenu::create(backItem,NULL);
-    pMenu->setPosition(ccp(40,300));
+    pMenu->setPosition(ccp(2*40,2*300));
     this->addChild(pMenu,111);
     
     
@@ -102,7 +102,7 @@ GameScene::GameScene()
     armBodyDef.type = b2_dynamicBody;
     armBodyDef.linearDamping = 1;//线性阻尼
     armBodyDef.angularDamping = 1;//角阻抗
-    armBodyDef.position.Set(230.0/PTM_RATIO, (FLOOR_HEIGHT + 91.0f)/PTM_RATIO);
+    armBodyDef.position.Set(2*230.0/PTM_RATIO, (FLOOR_HEIGHT + 2*91.0f)/PTM_RATIO);
     armBodyDef.userData = pArm;
     m_pArmBody = m_pWorld->CreateBody(&armBodyDef);
     
@@ -110,18 +110,18 @@ GameScene::GameScene()
     b2FixtureDef armBoxDef;
     armBoxDef.shape = &armBox;
     armBoxDef.density = 0.3f;
-    armBox.SetAsBox(11.0f/PTM_RATIO, 91.0f/PTM_RATIO);
+    armBox.SetAsBox(2*11.0f/PTM_RATIO, 2*91.0f/PTM_RATIO);
     m_pArmFixture = m_pArmBody->CreateFixture(&armBoxDef);
     
     //旋转关节
     b2RevoluteJointDef armJoinDef;
-    armJoinDef.Initialize(m_pGroundBody, m_pArmBody, b2Vec2(233.0f/PTM_RATIO, FLOOR_HEIGHT/PTM_RATIO));
+    armJoinDef.Initialize(m_pGroundBody, m_pArmBody, b2Vec2(2*233.0f/PTM_RATIO, FLOOR_HEIGHT/PTM_RATIO));
     armJoinDef.enableMotor = true;
     armJoinDef.enableLimit = true;
-    armJoinDef.motorSpeed = -10;
+    armJoinDef.motorSpeed = -10*2;
     armJoinDef.lowerAngle = CC_DEGREES_TO_RADIANS(9);
     armJoinDef.upperAngle = CC_DEGREES_TO_RADIANS(75);
-    armJoinDef.maxMotorTorque = 700;//就是当关节被旋转后，使关节恢复的力，类似弹力。这个力越小，越容易旋转，恢复力也就越小。
+    armJoinDef.maxMotorTorque = 2*900;//就是当关节被旋转后，使关节恢复的力，类似弹力。这个力越小，越容易旋转，恢复力也就越小。
     m_pArmJoin = (b2RevoluteJoint*)m_pWorld->CreateJoint(&armJoinDef);
     
     m_pMouseJoin = NULL;
@@ -178,21 +178,21 @@ void GameScene::InitPhysical()
     b2EdgeShape screenBorderShape;
     
 
-    screenBorderShape.Set(b2Vec2(0,FLOOR_HEIGHT/PTM_RATIO), b2Vec2(screenSize.width*3/PTM_RATIO,
+    screenBorderShape.Set(b2Vec2(0,FLOOR_HEIGHT/PTM_RATIO), b2Vec2(2*screenSize.width*3/PTM_RATIO,
                                                                    FLOOR_HEIGHT/PTM_RATIO));//下边界
     b2Fixture * fixture = m_pGroundBody->CreateFixture(&screenBorderShape, 1);
     fixture->SetFriction(1.0f);//给地面一点摩擦力
     
-    screenBorderShape.Set(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(0,FLOOR_HEIGHT/PTM_RATIO));//左边界
+    screenBorderShape.Set(b2Vec2(0,2*screenSize.height/PTM_RATIO), b2Vec2(0,FLOOR_HEIGHT/PTM_RATIO));//左边界
     m_pGroundBody->CreateFixture(&screenBorderShape, 0);
 
     
-    screenBorderShape.Set(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width*3/PTM_RATIO,
-                                                                                                                                              screenSize.height/PTM_RATIO));//上边界
+    screenBorderShape.Set(b2Vec2(0,2*screenSize.height/PTM_RATIO), b2Vec2(2*screenSize.width*3/PTM_RATIO,
+                                                                                                                                              2*screenSize.height/PTM_RATIO));//上边界
     m_pGroundBody->CreateFixture(&screenBorderShape, 0);
 
     
-    screenBorderShape.Set(b2Vec2(screenSize.width*3/PTM_RATIO,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width*3/PTM_RATIO,
+    screenBorderShape.Set(b2Vec2(2*screenSize.width*3/PTM_RATIO,screenSize.height/PTM_RATIO), b2Vec2(2*screenSize.width*3/PTM_RATIO,
                                                                                                                                               FLOOR_HEIGHT/PTM_RATIO));//右边界
     m_pGroundBody->CreateFixture(&screenBorderShape, 0);
 
@@ -218,7 +218,7 @@ void GameScene::tick(CCTime dt)
 	int positionIterations = 1;
     
 	
-	m_pWorld->Step(1/60.0, velocityIterations, positionIterations);
+	m_pWorld->Step(1/40.0, velocityIterations, positionIterations);
 	
     //更新位置和角度
     for (b2Body* b = m_pWorld->GetBodyList(); b; b = b->GetNext())
@@ -319,7 +319,7 @@ void GameScene::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
     CCPoint location = touch->getLocationInView();//??
     location = CCDirector::sharedDirector()->convertToGL(location);
     b2Vec2 locationWorld = b2Vec2(location.x/PTM_RATIO,location.y/PTM_RATIO);
-    if(locationWorld.x < m_pArmBody->GetWorldCenter().x + 50.0f/PTM_RATIO && locationWorld.x > m_pArmBody->GetWorldCenter().x - 50.0f/PTM_RATIO)
+    if(locationWorld.x < m_pArmBody->GetWorldCenter().x + 2*50.0f/PTM_RATIO && locationWorld.x > m_pArmBody->GetWorldCenter().x - 2*50.0f/PTM_RATIO)
     {
         b2MouseJointDef mouseJoinDef;
         mouseJoinDef.bodyA = m_pGroundBody;
@@ -328,10 +328,10 @@ void GameScene::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
         mouseJoinDef.maxForce = 2000;//施加给加节的力。只有当它大小旋转关节上的maxMotorTorque，才能使关切旋转
         m_pMouseJoin = (b2MouseJoint*)m_pWorld->CreateJoint(&mouseJoinDef);
     }
-    else if(locationWorld.x > m_pArmBody->GetWorldCenter().x + 50.0f/PTM_RATIO)
+    else if(locationWorld.x > m_pArmBody->GetWorldCenter().x + 2*50.0f/PTM_RATIO)
     {
         //镜头移动
-        CCFiniteTimeAction * action1 = CCMoveTo::create(1.5f, ccp(-960.0f, 0.0f));
+        CCFiniteTimeAction * action1 = CCMoveTo::create(1.5f, ccp(2*-960.0f, 0.0f));
         CCDelayTime *action3 = CCDelayTime::create(1.0f);
         CCFiniteTimeAction *action4 = CCMoveTo::create(1.5f, CCPointZero);
         runAction(CCSequence::create(action1,action3, action4, NULL));
@@ -434,11 +434,11 @@ bool GameScene::attachBullet()
     if(m_iCurrentBullet < m_pBullets.size())
     {
         m_pBulletBody = (b2Body*)m_pBullets.at(m_iCurrentBullet);
-        m_pBulletBody->SetTransform(b2Vec2(230.0f/PTM_RATIO, (155.0f+FLOOR_HEIGHT)/PTM_RATIO), 0.0f);
+        m_pBulletBody->SetTransform(b2Vec2(2*230.0f/PTM_RATIO, (2*155.0f+FLOOR_HEIGHT)/PTM_RATIO), 0.0f);
         m_pBulletBody->SetActive(true);
         
         b2WeldJointDef weldJointDef;
-        weldJointDef.Initialize(m_pBulletBody, m_pArmBody, b2Vec2(230.0f/PTM_RATIO,(155.0f+FLOOR_HEIGHT)/PTM_RATIO));
+        weldJointDef.Initialize(m_pBulletBody, m_pArmBody, b2Vec2(2*230.0f/PTM_RATIO,(2*155.0f+FLOOR_HEIGHT)/PTM_RATIO));
         weldJointDef.collideConnected = false;
         
         m_pBulletJoint = (b2WeldJoint*)m_pWorld->CreateJoint(&weldJointDef);
@@ -462,7 +462,7 @@ void GameScene::resetGame( )
    
     
     //镜头移动
-    CCFiniteTimeAction * action1 = CCMoveTo::create(1.5f, ccp(-480.0f, 0.0f));
+    CCFiniteTimeAction * action1 = CCMoveTo::create(1.5f, ccp(2*-480.0f, 0.0f));
     CCDelayTime *action3 = CCDelayTime::create(1.0f);
     CCFiniteTimeAction *action4 = CCMoveTo::create(1.5f, CCPointZero);
     runAction(CCSequence::create(action1,action3, action4, NULL));
@@ -554,7 +554,7 @@ void GameScene::createTarget(char * imageName,CCPoint position,float rotation,bo
     {
         b2CircleShape circle;
         fixtureDef.shape = &circle;
-        fixtureDef.density = 1.0f;//密度
+        fixtureDef.density = 0.1f;//密度
         fixtureDef.friction = 0.2f;//摩擦力
         circle.m_radius = sprite->getContentSize().width/2.0/PTM_RATIO;
         fixture = body->CreateFixture(&circle,0.5);
@@ -564,7 +564,7 @@ void GameScene::createTarget(char * imageName,CCPoint position,float rotation,bo
     {
         b2PolygonShape box;
         fixtureDef.shape = &box;
-        fixtureDef.density = 1.0f;//密度
+        fixtureDef.density = 0.1f;//密度
         fixtureDef.friction = 0.2f;//摩擦力
         box.SetAsBox(sprite->getContentSize().width/2.0/PTM_RATIO, sprite->getContentSize().height/2.0/PTM_RATIO);
         body->CreateFixture(&box,0.5f);

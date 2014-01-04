@@ -64,6 +64,10 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
 
 - (void)dealloc {
     [super dealloc];

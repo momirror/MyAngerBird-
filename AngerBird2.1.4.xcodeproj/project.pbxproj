@@ -328,6 +328,7 @@
 		03FA0A631859B7F6009B085C /* squirrel_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 03FA0A4A1859B7F6009B085C /* squirrel_1.png */; };
 		03FA0A641859B7F6009B085C /* squirrel_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 03FA0A4B1859B7F6009B085C /* squirrel_2.png */; };
 		03FA0A671859B9FE009B085C /* PopUpView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03FA0A661859B9FD009B085C /* PopUpView.cpp */; };
+		7275042C187794C20082D880 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7275042B187794C20082D880 /* icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -991,6 +992,7 @@
 		03FA0A4B1859B7F6009B085C /* squirrel_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = squirrel_2.png; sourceTree = "<group>"; };
 		03FA0A651859B9FD009B085C /* PopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopUpView.h; path = AngerBird2.1.4/PopUpView.h; sourceTree = "<group>"; };
 		03FA0A661859B9FD009B085C /* PopUpView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PopUpView.cpp; path = AngerBird2.1.4/PopUpView.cpp; sourceTree = "<group>"; };
+		7275042B187794C20082D880 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2302,6 +2304,7 @@
 		03FA0A321859B7F6009B085C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7275042A187794C20082D880 /* icon */,
 				03E16285185C2E6900F840CB /* button_on.png */,
 				03E16286185C2E6900F840CB /* button_off.png */,
 				03E1627C185C0B1A00F840CB /* setting_bg.png */,
@@ -2337,6 +2340,14 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		7275042A187794C20082D880 /* icon */ = {
+			isa = PBXGroup;
+			children = (
+				7275042B187794C20082D880 /* icon.png */,
+			);
+			path = icon;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2347,6 +2358,7 @@
 				03FA063E1859B353009B085C /* Sources */,
 				03FA063F1859B353009B085C /* Frameworks */,
 				03FA06401859B353009B085C /* Resources */,
+				72DA28D3187015F000B5EAF6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2387,6 +2399,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7275042C187794C20082D880 /* icon.png in Resources */,
 				03FA066C1859B353009B085C /* iTunesArtwork in Resources */,
 				03FA070B1859B354009B085C /* ChangeLog in Resources */,
 				03FA087F1859B358009B085C /* project.pbxproj in Resources */,
@@ -2431,6 +2444,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		72DA28D3187015F000B5EAF6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\n\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\n\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		03FA063E1859B353009B085C /* Sources */ = {
@@ -2717,7 +2746,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 龙 张 (3E6U2FV2AA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 龙 张 (3E6U2FV2AA)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2741,8 +2771,10 @@
 					"\"$(PROJECT_NAME)/libs/cocos2dx/platform/third_party/ios\"",
 					"\"$(PROJECT_NAME)/libs/cocos2dx/platform/ios\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				SDKROOT = iphoneos;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PROVISIONING_PROFILE = "7D0261A6-488C-4B64-BB22-8C7F1C182365";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7D0261A6-488C-4B64-BB22-8C7F1C182365";
+				SDKROOT = iphoneos7.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2751,7 +2783,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 龙 张 (3E6U2FV2AA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 龙 张 (3E6U2FV2AA)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
@@ -2772,8 +2805,9 @@
 					"\"$(PROJECT_NAME)/libs/cocos2dx/platform/third_party/ios\"",
 					"\"$(PROJECT_NAME)/libs/cocos2dx/platform/ios\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "7D0261A6-488C-4B64-BB22-8C7F1C182365";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -2783,6 +2817,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: 龙 张 (3E6U2FV2AA)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2801,6 +2836,8 @@
 					"-websockets",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7D0261A6-488C-4B64-BB22-8C7F1C182365";
+				SDKROOT = iphoneos6.1;
 				USER_HEADER_SEARCH_PATHS = "\"AngerBird2.1.4/libs\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2810,6 +2847,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: 龙 张 (3E6U2FV2AA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 龙 张 (3E6U2FV2AA)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AngerBird2.1.4/Prefix.pch;
@@ -2827,6 +2866,8 @@
 					"-websockets",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7D0261A6-488C-4B64-BB22-8C7F1C182365";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7D0261A6-488C-4B64-BB22-8C7F1C182365";
 				USER_HEADER_SEARCH_PATHS = "\"AngerBird2.1.4/libs\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

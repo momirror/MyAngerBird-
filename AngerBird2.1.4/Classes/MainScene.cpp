@@ -61,21 +61,21 @@ MainScene::MainScene()
 //    CCMenuItemImage * pStartItem = CCMenuItemImage::create("button_Start.png", "button_Start.png");
     CCMenuItemImage * pStartItem = CCMenuItemImage::create("button_Start.png", "button_Start__Selected.png", this, menu_selector(MainScene::StartGame));
     CCMenu * StartMenu = CCMenu::createWithItem(pStartItem);
-    StartMenu->setPosition(ccp(400,260));
+    StartMenu->setPosition(ccp(800,520));
     StartMenu->setTouchPriority(1);
     this->addChild(StartMenu);
     
     
     CCMenuItemImage * pContinuteItem = CCMenuItemImage::create("button_Continute.png", "button_Continute_Selected.png", this, menu_selector(MainScene::ContinuteGame));
     CCMenu * pContinuteMenu = CCMenu::createWithItem(pContinuteItem);
-    pContinuteMenu->setPosition(ccp(370,180));
+    pContinuteMenu->setPosition(ccp(740,360));
     pContinuteMenu->setTouchPriority(1);
     this->addChild(pContinuteMenu);
     
     
     CCMenuItemImage * pSettingItem = CCMenuItemImage::create("button_Setting.png", "button_Setting_Selected.png", this, menu_selector(MainScene::Setting));
     CCMenu * pSettingMenu = CCMenu::createWithItem(pSettingItem);
-    pSettingMenu->setPosition(ccp(420,120));
+    pSettingMenu->setPosition(ccp(840,240));
     pSettingMenu->setTouchPriority(1);
     this->addChild(pSettingMenu);
     

@@ -10,8 +10,8 @@
 
 PopUpView::PopUpView(const char * bgImageName,const char * title,const char * message,const char * firstButtonTitle,SEL_MenuHandler  firstSel,const char * secondButtonTitle,SEL_MenuHandler secondSel,CCObject * delegate)
 {
-    float fTitleHeight = 20.0f;
-    float fBtnHeight = 25.0f;
+    float fTitleHeight = 2*20.0f;
+    float fBtnHeight = 2*25.0f;
     this->setTouchEnabled(true);
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
     
@@ -23,7 +23,7 @@ PopUpView::PopUpView(const char * bgImageName,const char * title,const char * me
     CCRect bgRect = m_pBgSprite->getTextureRect();
 //    m_pTitleLabel = CCLabelTTF::create(title, "Arial", 15);
     CCSize titleSize = CCSizeMake(bgRect.size.width, fTitleHeight);
-    m_pTitleLabel = CCLabelTTF::create(title, "Arial", 15, titleSize, kCCTextAlignmentCenter);
+    m_pTitleLabel = CCLabelTTF::create(title, "Arial", 30, titleSize, kCCTextAlignmentCenter);
     
     m_pTitleLabel->setAnchorPoint(ccp(0,1));
     m_pTitleLabel->setPosition(ccp(bgRect.origin.x,bgRect.origin.y+bgRect.size.height));
@@ -31,19 +31,19 @@ PopUpView::PopUpView(const char * bgImageName,const char * title,const char * me
     
     CCRect titleRect = m_pTitleLabel->getTextureRect();
     CCSize MessageSize = CCSizeMake(bgRect.size.width, bgRect.size.height - 2*fTitleHeight);
-    m_pMessageLabel = CCLabelTTF::create(message, "Arial", 15, MessageSize, kCCTextAlignmentCenter);
+    m_pMessageLabel = CCLabelTTF::create(message, "Arial", 30, MessageSize, kCCTextAlignmentCenter);
     m_pMessageLabel->setAnchorPoint(ccp(0,1));
     m_pMessageLabel->setPosition(ccp(titleRect.origin.x,bgRect.origin.y+bgRect.size.height - 1.3*fTitleHeight));
     m_pBgSprite->addChild(m_pMessageLabel);
     
     CCSprite * btn1Bg = CCSprite::create("btn1.png");
     btn1Bg->setAnchorPoint(ccp(0.5,0.5));
-    btn1Bg->setPosition(ccp(bgRect.origin.x + 70,bgRect.origin.y+fBtnHeight));
+    btn1Bg->setPosition(ccp(bgRect.origin.x + 70*2,bgRect.origin.y+fBtnHeight));
     m_pBgSprite->addChild(btn1Bg);
     
     CCSprite * btn2Bg = CCSprite::create("btn2.png");
     btn2Bg->setAnchorPoint(ccp(0.5,0.5));
-    btn2Bg->setPosition(ccp(bgRect.origin.x + 200,bgRect.origin.y+fBtnHeight));
+    btn2Bg->setPosition(ccp(bgRect.origin.x + 200*2,bgRect.origin.y+fBtnHeight));
     m_pBgSprite->addChild(btn2Bg);
     
     m_pFirstButtonItem = CCMenuItemFont::create(firstButtonTitle, this, menu_selector(PopUpView::OKButtonResponse));
