@@ -504,15 +504,15 @@ void GameScene::resetBullet()
 
 void GameScene::createTargets(int iLevel)
 {
-    if(iLevel >= m_pEnemyInfos->count())
-    {
-        iLevel = 0;
-        global::setGameLevel(iLevel);
-        
-        m_popView = new PopUpView("popUpBGg.png", "Yeah", "你已经通关，真厉害～", "OK",menu_selector(GameScene::backToMainMenu), "Cancel",menu_selector(GameScene::backToMainMenu),this);
-        this->addChild(m_popView,20);
-        return;
-    }
+//    if(iLevel >= m_pEnemyInfos->count())
+//    {
+//        iLevel = 0;
+//        global::setGameLevel(iLevel);
+//        
+//        m_popView = new PopUpView("popUpBGg.png", "Yeah", "你已经通关，真厉害～", "OK",menu_selector(GameScene::backToMainMenu), "Cancel",menu_selector(GameScene::backToMainMenu),this);
+//        this->addChild(m_popView,20);
+//        return;
+//    }
     
     CCDictionary * pEnemyNumDic = (CCDictionary*)((CCArray*)m_pEnemyInfos->objectAtIndex(iLevel))->objectAtIndex(0);
     m_iCurrentEnemy = pEnemyNumDic->valueForKey("EnemyNumber")->intValue();
@@ -657,7 +657,15 @@ void GameScene::succed(bool bSuccess)
             CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("succece.mp3");
         }
         
-        m_popView = new PopUpView("popUpBGg.png", "Yeah", "恭喜你，闯关成功！", "OK",menu_selector(GameScene::nextLevel), "Cancel",menu_selector(GameScene::backToMainMenu),this);
+        if(global::getGameLevel() < m_pEnemyInfos->count() - 1)
+        {
+            
+            m_popView = new PopUpView("popUpBGg.png", "Yeah", "恭喜你，挑战下一关吧～", "OK",menu_selector(GameScene::nextLevel), "Cancel",menu_selector(GameScene::backToMainMenu),this);
+        }
+        else
+        {
+            m_popView = new PopUpView("popUpBGg.png", "Yeah", "你已经通关，真厉害～", "OK",menu_selector(GameScene::backToMainMenu), "Cancel",menu_selector(GameScene::backToMainMenu),this);
+        }
         this->addChild(m_popView,20);
         
     }
