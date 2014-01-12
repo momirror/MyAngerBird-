@@ -77,8 +77,8 @@ void MyContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* im
         {
             if(maxImpulse > 1)
             {
-                CCLog("tag:A->%d,B->%d",spriteA->getTag(),spriteB->getTag());
-                CCLog("碰撞冲量为：%f,%f",impulse->normalImpulses[0],impulse->normalImpulses[1]);
+//                CCLog("tag:A->%d,B->%d",spriteA->getTag(),spriteB->getTag());
+//                CCLog("碰撞冲量为：%f,%f",impulse->normalImpulses[0],impulse->normalImpulses[1]);
 //                delegate->eliminateEnery((spriteA->getTag() == ENEMY_TAT)?bodyA:bodyB);
                 contracts.insert((spriteA->getTag() == ENEMY_TAT)?bodyA:bodyB);
             }

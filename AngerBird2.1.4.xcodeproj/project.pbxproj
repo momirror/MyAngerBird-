@@ -328,6 +328,7 @@
 		03FA0A631859B7F6009B085C /* squirrel_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 03FA0A4A1859B7F6009B085C /* squirrel_1.png */; };
 		03FA0A641859B7F6009B085C /* squirrel_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 03FA0A4B1859B7F6009B085C /* squirrel_2.png */; };
 		03FA0A671859B9FE009B085C /* PopUpView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03FA0A661859B9FD009B085C /* PopUpView.cpp */; };
+		7222078818827F6C004C54C0 /* miao.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7222078718827F6C004C54C0 /* miao.wav */; };
 		7275042C187794C20082D880 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7275042B187794C20082D880 /* icon.png */; };
 /* End PBXBuildFile section */
 
@@ -992,6 +993,7 @@
 		03FA0A4B1859B7F6009B085C /* squirrel_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = squirrel_2.png; sourceTree = "<group>"; };
 		03FA0A651859B9FD009B085C /* PopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopUpView.h; path = AngerBird2.1.4/PopUpView.h; sourceTree = "<group>"; };
 		03FA0A661859B9FD009B085C /* PopUpView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PopUpView.cpp; path = AngerBird2.1.4/PopUpView.cpp; sourceTree = "<group>"; };
+		7222078718827F6C004C54C0 /* miao.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = miao.wav; sourceTree = "<group>"; };
 		7275042B187794C20082D880 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1030,6 +1032,7 @@
 		03C9A2FC185BE97B00A297E6 /* music */ = {
 			isa = PBXGroup;
 			children = (
+				7222078718827F6C004C54C0 /* miao.wav */,
 				03C9A2FD185BE97B00A297E6 /* backgroundMusic.mp3 */,
 				03C9A2FE185BE97B00A297E6 /* fly.mp3 */,
 				03C9A2FF185BE97B00A297E6 /* succece.mp3 */,
@@ -2423,6 +2426,7 @@
 				03FA0A611859B7F6009B085C /* head_dog.png in Resources */,
 				03FA0A621859B7F6009B085C /* popUpBGg.png in Resources */,
 				03FA0A631859B7F6009B085C /* squirrel_1.png in Resources */,
+				7222078818827F6C004C54C0 /* miao.wav in Resources */,
 				03FA0A641859B7F6009B085C /* squirrel_2.png in Resources */,
 				032E6838185A9AA400D9574C /* mainSenceBg.png in Resources */,
 				032E683E185AA02500D9574C /* congratulation.plist in Resources */,
@@ -2457,7 +2461,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\n\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\n\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+			shellScript = "";
 		};
 /* End PBXShellScriptBuildPhase section */
 

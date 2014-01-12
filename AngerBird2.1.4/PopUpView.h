@@ -31,8 +31,10 @@ public:
 private:
     CCLabelTTF              * m_pTitleLabel;
     CCLabelTTF              * m_pMessageLabel;
-    CCMenuItemFont          * m_pFirstButtonItem;
-    CCMenuItemFont          * m_pSecondButtonItem;
+    CCLabelTTF              * m_pFirstLabel;
+    CCLabelTTF              * m_pSecondLabel;
+    CCMenuItemImage          * m_pFirstButtonItem;
+    CCMenuItemImage          * m_pSecondButtonItem;
     CCSprite                * m_pBgSprite;
     SEL_MenuHandler           m_firstSel;
     SEL_MenuHandler           m_secondSel;

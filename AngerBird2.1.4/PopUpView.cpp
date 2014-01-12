@@ -36,25 +36,37 @@ PopUpView::PopUpView(const char * bgImageName,const char * title,const char * me
     m_pMessageLabel->setPosition(ccp(titleRect.origin.x,bgRect.origin.y+bgRect.size.height - 1.3*fTitleHeight));
     m_pBgSprite->addChild(m_pMessageLabel);
     
-    CCSprite * btn1Bg = CCSprite::create("btn1.png");
-    btn1Bg->setAnchorPoint(ccp(0.5,0.5));
-    btn1Bg->setPosition(ccp(bgRect.origin.x + 70*2,bgRect.origin.y+fBtnHeight));
-    m_pBgSprite->addChild(btn1Bg);
+//    CCSprite * btn1Bg = CCSprite::create("btn1.png");
+//    btn1Bg->setAnchorPoint(ccp(0.5,0.5));
+//    btn1Bg->setPosition(ccp(bgRect.origin.x + 70*2,bgRect.origin.y+fBtnHeight));
+//    m_pBgSprite->addChild(btn1Bg);
     
-    CCSprite * btn2Bg = CCSprite::create("btn2.png");
-    btn2Bg->setAnchorPoint(ccp(0.5,0.5));
-    btn2Bg->setPosition(ccp(bgRect.origin.x + 200*2,bgRect.origin.y+fBtnHeight));
-    m_pBgSprite->addChild(btn2Bg);
+//    CCSprite * btn2Bg = CCSprite::create("btn2.png");
+//    btn2Bg->setAnchorPoint(ccp(0.5,0.5));
+//    btn2Bg->setPosition(ccp(bgRect.origin.x + 200*2,bgRect.origin.y+fBtnHeight));
+//    m_pBgSprite->addChild(btn2Bg);
     
-    m_pFirstButtonItem = CCMenuItemFont::create(firstButtonTitle, this, menu_selector(PopUpView::OKButtonResponse));
+    m_pFirstButtonItem = CCMenuItemImage::create("btn1.png", "btn1.png", this, menu_selector(PopUpView::OKButtonResponse));
     CCMenu * pFirstMenu = CCMenu::create(m_pFirstButtonItem,NULL);
-    pFirstMenu->setPosition(btn1Bg->getPosition());
+    pFirstMenu->setPosition(ccp(bgRect.origin.x + 70*2,bgRect.origin.y+fBtnHeight));
     m_pBgSprite->addChild(pFirstMenu);
     
-    m_pSecondButtonItem = CCMenuItemFont::create(secondButtonTitle, this, menu_selector(PopUpView::CancelButtonResponse));
+    m_pSecondButtonItem = CCMenuItemImage::create("btn2.png", "btn2.png", this, menu_selector(PopUpView::CancelButtonResponse));
+//    create(secondButtonTitle, this, menu_selector(PopUpView::CancelButtonResponse));
     CCMenu * pSecondMenu = CCMenu::create(m_pSecondButtonItem,NULL);
-    pSecondMenu->setPosition(btn2Bg->getPosition());
+    pSecondMenu->setPosition(ccp(bgRect.origin.x + 200*2,bgRect.origin.y+fBtnHeight));
     m_pBgSprite->addChild(pSecondMenu);
+    
+    
+    m_pFirstLabel = CCLabelTTF::create(firstButtonTitle, "Arial", 30, MessageSize, kCCTextAlignmentCenter);
+//    m_pFirstLabel->setAnchorPoint(ccp(0.5,0.5));
+    m_pFirstLabel->setPosition(ccp(bgRect.origin.x + 70*2,bgRect.origin.y+fBtnHeight - 70));
+    m_pBgSprite->addChild(m_pFirstLabel);
+    
+    m_pSecondLabel = CCLabelTTF::create(secondButtonTitle, "Arial", 30, MessageSize, kCCTextAlignmentCenter);
+//    m_pSecondLabel->setAnchorPoint(ccp(0.5,0.5));
+    m_pSecondLabel->setPosition(ccp(bgRect.origin.x + 200*2,bgRect.origin.y+fBtnHeight - 70));
+    m_pBgSprite->addChild(m_pSecondLabel);
 
     m_firstSel = firstSel;
     m_secondSel = secondSel;

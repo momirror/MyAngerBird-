@@ -181,7 +181,7 @@ void GameScene::InitPhysical()
     screenBorderShape.Set(b2Vec2(0,FLOOR_HEIGHT/PTM_RATIO), b2Vec2(2*screenSize.width*3/PTM_RATIO,
                                                                    FLOOR_HEIGHT/PTM_RATIO));//下边界
     b2Fixture * fixture = m_pGroundBody->CreateFixture(&screenBorderShape, 1);
-    fixture->SetFriction(1.0f);//给地面一点摩擦力
+//    fixture->SetFriction(1.0f);//给地面一点摩擦力
     
     screenBorderShape.Set(b2Vec2(0,2*screenSize.height/PTM_RATIO), b2Vec2(0,FLOOR_HEIGHT/PTM_RATIO));//左边界
     m_pGroundBody->CreateFixture(&screenBorderShape, 0);
@@ -300,6 +300,13 @@ void GameScene::tick(CCTime dt)
         
         m_iCurrentEnemy--;
         
+        
+        if(global::getGameEffectState())
+        {
+            CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("miao.wav");
+        }
+
+        
     }
     
   
@@ -340,7 +347,7 @@ void GameScene::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
 
 void GameScene::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
 {
-        CCLog("touch moved");
+//        CCLog("touch moved");
     if(m_pMouseJoin == NULL)
     {
         return;
@@ -356,7 +363,7 @@ void GameScene::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent)
 
 void GameScene::ccTouchesEnded(CCSet* touches, CCEvent* event)
 {
-    CCLOG("touch end");
+//    CCLOG("touch end");
     if(m_pMouseJoin != NULL)
     {
         if(m_pArmJoin->GetJointAngle() >= CC_DEGREES_TO_RADIANS(5))//偏离大于5度才发射子弹
@@ -416,7 +423,7 @@ void GameScene::createBullets(int count)
             
             b2FixtureDef ballShapeDef;
             ballShapeDef.shape = &circle;
-            ballShapeDef.density = 0.8f;
+            ballShapeDef.density = 1.8f;
             ballShapeDef.restitution = 0.2f;
             ballShapeDef.friction = 0.99f;
             bulletBody->CreateFixture(&ballShapeDef);
@@ -497,7 +504,16 @@ void GameScene::resetBullet()
 
 void GameScene::createTargets(int iLevel)
 {
-
+    if(iLevel >= m_pEnemyInfos->count())
+    {
+        iLevel = 0;
+        global::setGameLevel(iLevel);
+        
+        m_popView = new PopUpView("popUpBGg.png", "Yeah", "你已经通关，真厉害～", "OK",menu_selector(GameScene::backToMainMenu), "Cancel",menu_selector(GameScene::backToMainMenu),this);
+        this->addChild(m_popView,20);
+        return;
+    }
+    
     CCDictionary * pEnemyNumDic = (CCDictionary*)((CCArray*)m_pEnemyInfos->objectAtIndex(iLevel))->objectAtIndex(0);
     m_iCurrentEnemy = pEnemyNumDic->valueForKey("EnemyNumber")->intValue();
     
@@ -554,7 +570,7 @@ void GameScene::createTarget(char * imageName,CCPoint position,float rotation,bo
     {
         b2CircleShape circle;
         fixtureDef.shape = &circle;
-        fixtureDef.density = 0.1f;//密度
+        fixtureDef.density = 1.0f;//密度
         fixtureDef.friction = 0.2f;//摩擦力
         circle.m_radius = sprite->getContentSize().width/2.0/PTM_RATIO;
         fixture = body->CreateFixture(&circle,0.5);
@@ -564,7 +580,7 @@ void GameScene::createTarget(char * imageName,CCPoint position,float rotation,bo
     {
         b2PolygonShape box;
         fixtureDef.shape = &box;
-        fixtureDef.density = 0.1f;//密度
+        fixtureDef.density = 1.0f;//密度
         fixtureDef.friction = 0.2f;//摩擦力
         box.SetAsBox(sprite->getContentSize().width/2.0/PTM_RATIO, sprite->getContentSize().height/2.0/PTM_RATIO);
         body->CreateFixture(&box,0.5f);
@@ -607,7 +623,19 @@ bool GameScene::eliminateEnery(b2Body*enemyBody)
 
 void GameScene::backToMainMenu()
 {
+    if(m_popView!= NULL)
+    {
+        this->removeChild(m_popView);
+        m_popView = NULL;
+    }
+    
     global::saveGameLevel();
+    
+    if(global::getBackgroundMusicState())
+    {
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+    }
+
     
     CCScene * scence = MainScene::scene();
     CCDirector::sharedDirector()->replaceScene(CCTransitionJumpZoom::create(2.0f,scence));
@@ -672,6 +700,12 @@ void GameScene::nextLevel()
 
 void GameScene::repeatGame()
 {
+    if(global::getBackgroundMusicState())
+    {
+        CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+    }
+
+    
     this->removeChild(m_popView, true);
     CCScene * scene = GameScene::scene();
     CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(2, scene)); //淡出淡入切换
@@ -693,8 +727,8 @@ void GameScene::onEnter()
 void GameScene::onExit()
 {
     CCLayer::onExit();
-    if(global::getBackgroundMusicState())
-    {
-        CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
-    }
+//    if(global::getBackgroundMusicState())
+//    {
+//        CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+//    }
 }
